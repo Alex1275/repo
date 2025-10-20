@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur de Devises - Afrique & Monde</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header bg-primary text-white py-3 fixed-top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <button class="btn btn-light d-lg-none" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="col">
+                    <h1 class="h4 mb-0">
+                        <i class="fas fa-exchange-alt"></i> Convertisseur de Devises
+                    </h1>
+                </div>
+                <div class="col-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe"></i> FR
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Français</a></li>
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar bg-dark text-white" id="sidebar">
+            <div class="sidebar-header p-3">
+                <h5 class="mb-0">Menu</h5>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#converter" class="sidebar-link">
+                        <i class="fas fa-exchange-alt"></i> Convertisseur
+                    </a>
+                </li>
+                <li>
+                    <a href="#african-currencies" class="sidebar-link">
+                        <i class="fas fa-map-marked-alt"></i> Devises Africaines
+                    </a>
+                </li>
+                <li>
+                    <a href="#world-currencies" class="sidebar-link">
+                        <i class="fas fa-globe"></i> Devises Mondiales
+                    </a>
+                </li>
+                <li>
+                    <a href="#favorites" class="sidebar-link">
+                        <i class="fas fa-star"></i> Favoris
+                    </a>
+                </li>
+                <li>
+                    <a href="#history" class="sidebar-link">
+                        <i class="fas fa-history"></i> Historique
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" class="sidebar-link">
+                        <i class="fas fa-info-circle"></i> À propos
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content" id="content">
+            <div class="container-fluid py-4">
+                <!-- Converter Section -->
+                <section id="converter" class="section active">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card shadow-lg">
+                                <div class="card-header bg-primary text-white">
+                                    <h3 class="mb-0"><i class="fas fa-exchange-alt"></i> Convertisseur de Devises</h3>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Exchange Rate Display -->
+                                    <div class="alert alert-info" id="rateDisplay" style="display: none;">
+                                        <i class="fas fa-info-circle"></i> <span id="rateText"></span>
+                                    </div>
+
+                                    <!-- Conversion Form -->
+                                    <form id="converterForm">
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="fromAmount" class="form-label">Montant</label>
+                                                <input type="number" class="form-control form-control-lg" id="fromAmount" value="1" min="0" step="0.01" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="fromCurrency" class="form-label">De</label>
+                                                <select class="form-select form-select-lg" id="fromCurrency" required>
+                                                    <optgroup label="Devises Africaines">
+                                                        <option value="XOF" selected>XOF - Franc CFA (Afrique de l'Ouest)</option>
+                                                        <option value="XAF">XAF - Franc CFA (Afrique Centrale)</option>
+                                                        <option value="ZAR">ZAR - Rand Sud-Africain</option>
+                                                        <option value="NGN">NGN - Naira Nigérian</option>
+                                                        <option value="EGP">EGP - Livre Égyptienne</option>
+                                                        <option value="MAD">MAD - Dirham Marocain</option>
+                                                        <option value="TND">TND - Dinar Tunisien</option>
+                                                        <option value="DZD">DZD - Dinar Algérien</option>
+                                                        <option value="KES">KES - Shilling Kényan</option>
+                                                        <option value="GHS">GHS - Cedi Ghanéen</option>
+                                                        <option value="ETB">ETB - Birr Éthiopien</option>
+                                                        <option value="UGX">UGX - Shilling Ougandais</option>
+                                                        <option value="TZS">TZS - Shilling Tanzanien</option>
+                                                        <option value="MUR">MUR - Roupie Mauricienne</option>
+                                                        <option value="MGA">MGA - Ariary Malgache</option>
+                                                    </optgroup>
+                                                    <optgroup label="Devises Mondiales">
+                                                        <option value="EUR">EUR - Euro</option>
+                                                        <option value="USD">USD - Dollar Américain</option>
+                                                        <option value="GBP">GBP - Livre Sterling</option>
+                                                        <option value="JPY">JPY - Yen Japonais</option>
+                                                        <option value="CHF">CHF - Franc Suisse</option>
+                                                        <option value="CAD">CAD - Dollar Canadien</option>
+                                                        <option value="AUD">AUD - Dollar Australien</option>
+                                                        <option value="CNY">CNY - Yuan Chinois</option>
+                                                        <option value="INR">INR - Roupie Indienne</option>
+                                                        <option value="BRL">BRL - Real Brésilien</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center mb-4">
+                                            <button type="button" class="btn btn-outline-primary btn-lg rounded-circle" id="swapBtn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="toAmount" class="form-label">Montant Converti</label>
+                                                <input type="number" class="form-control form-control-lg" id="toAmount" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="toCurrency" class="form-label">Vers</label>
+                                                <select class="form-select form-select-lg" id="toCurrency" required>
+                                                    <optgroup label="Devises Africaines">
+                                                        <option value="XOF">XOF - Franc CFA (Afrique de l'Ouest)</option>
+                                                        <option value="XAF">XAF - Franc CFA (Afrique Centrale)</option>
+                                                        <option value="ZAR">ZAR - Rand Sud-Africain</option>
+                                                        <option value="NGN">NGN - Naira Nigérian</option>
+                                                        <option value="EGP">EGP - Livre Égyptienne</option>
+                                                        <option value="MAD">MAD - Dirham Marocain</option>
+                                                        <option value="TND">TND - Dinar Tunisien</option>
+                                                        <option value="DZD">DZD - Dinar Algérien</option>
+                                                        <option value="KES">KES - Shilling Kényan</option>
+                                                        <option value="GHS">GHS - Cedi Ghanéen</option>
+                                                        <option value="ETB">ETB - Birr Éthiopien</option>
+                                                        <option value="UGX">UGX - Shilling Ougandais</option>
+                                                        <option value="TZS">TZS - Shilling Tanzanien</option>
+                                                        <option value="MUR">MUR - Roupie Mauricienne</option>
+                                                        <option value="MGA">MGA - Ariary Malgache</option>
+                                                    </optgroup>
+                                                    <optgroup label="Devises Mondiales">
+                                                        <option value="EUR" selected>EUR - Euro</option>
+                                                        <option value="USD">USD - Dollar Américain</option>
+                                                        <option value="GBP">GBP - Livre Sterling</option>
+                                                        <option value="JPY">JPY - Yen Japonais</option>
+                                                        <option value="CHF">CHF - Franc Suisse</option>
+                                                        <option value="CAD">CAD - Dollar Canadien</option>
+                                                        <option value="AUD">AUD - Dollar Australien</option>
+                                                        <option value="CNY">CNY - Yuan Chinois</option>
+                                                        <option value="INR">INR - Roupie Indienne</option>
+                                                        <option value="BRL">BRL - Real Brésilien</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" class="btn btn-primary btn-lg">
+                                                <i class="fas fa-calculator"></i> Convertir
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" id="addToFavorites">
+                                                <i class="fas fa-star"></i> Ajouter aux favoris
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <!-- Loading Spinner -->
+                                    <div class="text-center mt-3" id="loadingSpinner" style="display: none;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Chargement...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Last Update Info -->
+                            <div class="text-center mt-3">
+                                <small class="text-muted" id="lastUpdate"></small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- African Currencies Section -->
+                <section id="african-currencies" class="section">
+                    <h2 class="mb-4"><i class="fas fa-map-marked-alt"></i> Devises Africaines</h2>
+                    <div class="row" id="africanCurrenciesContainer">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Devise</th>
+                                                    <th>Code</th>
+                                                    <th>Pays</th>
+                                                    <th>Taux (vs EUR)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="africanRatesTable">
+                                                <tr>
+                                                    <td colspan="4" class="text-center">Chargement des taux...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- World Currencies Section -->
+                <section id="world-currencies" class="section">
+                    <h2 class="mb-4"><i class="fas fa-globe"></i> Devises Mondiales</h2>
+                    <div class="row" id="worldCurrenciesContainer">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Devise</th>
+                                                    <th>Code</th>
+                                                    <th>Région</th>
+                                                    <th>Taux (vs EUR)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="worldRatesTable">
+                                                <tr>
+                                                    <td colspan="4" class="text-center">Chargement des taux...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Favorites Section -->
+                <section id="favorites" class="section">
+                    <h2 class="mb-4"><i class="fas fa-star"></i> Mes Favoris</h2>
+                    <div id="favoritesContainer">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Aucune conversion favorite pour le moment. Ajoutez vos conversions fréquentes depuis le convertisseur.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History Section -->
+                <section id="history" class="section">
+                    <h2 class="mb-4"><i class="fas fa-history"></i> Historique des Conversions</h2>
+                    <div id="historyContainer">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Aucune conversion dans l'historique.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About Section -->
+                <section id="about" class="section">
+                    <h2 class="mb-4"><i class="fas fa-info-circle"></i> À propos</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Convertisseur de Devises Internationales</h5>
+                            <p>Cette application vous permet de convertir facilement entre différentes devises du monde entier, avec un focus particulier sur les devises africaines.</p>
+
+                            <h6 class="mt-4">Fonctionnalités :</h6>
+                            <ul>
+                                <li>Conversion en temps réel de plus de 25 devises</li>
+                                <li>Focus sur les devises africaines</li>
+                                <li>Interface responsive (desktop, tablette, mobile)</li>
+                                <li>Historique des conversions</li>
+                                <li>Gestion des favoris</li>
+                            </ul>
+
+                            <h6 class="mt-4">Source des données :</h6>
+                            <p>Les taux de change sont fournis par l'API ExchangeRate gratuite et sont mis à jour quotidiennement.</p>
+
+                            <p class="text-muted mt-4">
+                                <small>Version 1.0.0 - Développé avec HTML, CSS, JavaScript, Bootstrap, jQuery et Ajax</small>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="#converter" class="nav-item active">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Convertir</span>
+        </a>
+        <a href="#african-currencies" class="nav-item">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Afrique</span>
+        </a>
+        <a href="#world-currencies" class="nav-item">
+            <i class="fas fa-globe"></i>
+            <span>Monde</span>
+        </a>
+        <a href="#favorites" class="nav-item">
+            <i class="fas fa-star"></i>
+            <span>Favoris</span>
+        </a>
+        <a href="#history" class="nav-item">
+            <i class="fas fa-history"></i>
+            <span>Historique</span>
+        </a>
+    </nav>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
