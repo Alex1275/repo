@@ -9,19 +9,44 @@ $(document).ready(function() {
     const africanCurrencies = {
         'XOF': { name: 'Franc CFA (Afrique de l\'Ouest)', country: 'UEMOA' },
         'XAF': { name: 'Franc CFA (Afrique Centrale)', country: 'CEMAC' },
-        'ZAR': { name: 'Rand Sud-Africain', country: 'Afrique du Sud' },
-        'NGN': { name: 'Naira Nigérian', country: 'Nigeria' },
-        'EGP': { name: 'Livre Égyptienne', country: 'Égypte' },
-        'MAD': { name: 'Dirham Marocain', country: 'Maroc' },
-        'TND': { name: 'Dinar Tunisien', country: 'Tunisie' },
         'DZD': { name: 'Dinar Algérien', country: 'Algérie' },
-        'KES': { name: 'Shilling Kényan', country: 'Kenya' },
-        'GHS': { name: 'Cedi Ghanéen', country: 'Ghana' },
+        'AOA': { name: 'Kwanza Angolais', country: 'Angola' },
+        'BWP': { name: 'Pula Botswanais', country: 'Botswana' },
+        'BIF': { name: 'Franc Burundais', country: 'Burundi' },
+        'CVE': { name: 'Escudo Cap-Verdien', country: 'Cap-Vert' },
+        'KMF': { name: 'Franc Comorien', country: 'Comores' },
+        'DJF': { name: 'Franc Djiboutien', country: 'Djibouti' },
+        'EGP': { name: 'Livre Égyptienne', country: 'Égypte' },
+        'ERN': { name: 'Nakfa Érythréen', country: 'Érythrée' },
+        'SZL': { name: 'Lilangeni Eswatinien', country: 'Eswatini' },
         'ETB': { name: 'Birr Éthiopien', country: 'Éthiopie' },
-        'UGX': { name: 'Shilling Ougandais', country: 'Ouganda' },
-        'TZS': { name: 'Shilling Tanzanien', country: 'Tanzanie' },
+        'GMD': { name: 'Dalasi Gambien', country: 'Gambie' },
+        'GHS': { name: 'Cedi Ghanéen', country: 'Ghana' },
+        'GNF': { name: 'Franc Guinéen', country: 'Guinée' },
+        'KES': { name: 'Shilling Kényan', country: 'Kenya' },
+        'LSL': { name: 'Loti Lesothan', country: 'Lesotho' },
+        'LRD': { name: 'Dollar Libérien', country: 'Libéria' },
+        'LYD': { name: 'Dinar Libyen', country: 'Libye' },
+        'MGA': { name: 'Ariary Malgache', country: 'Madagascar' },
+        'MWK': { name: 'Kwacha Malawite', country: 'Malawi' },
         'MUR': { name: 'Roupie Mauricienne', country: 'Maurice' },
-        'MGA': { name: 'Ariary Malgache', country: 'Madagascar' }
+        'MAD': { name: 'Dirham Marocain', country: 'Maroc' },
+        'MZN': { name: 'Metical Mozambicain', country: 'Mozambique' },
+        'NAD': { name: 'Dollar Namibien', country: 'Namibie' },
+        'NGN': { name: 'Naira Nigérian', country: 'Nigeria' },
+        'UGX': { name: 'Shilling Ougandais', country: 'Ouganda' },
+        'RWF': { name: 'Franc Rwandais', country: 'Rwanda' },
+        'STN': { name: 'Dobra Santoméen', country: 'Sao Tomé-et-Principe' },
+        'SCR': { name: 'Roupie Seychelloise', country: 'Seychelles' },
+        'SLL': { name: 'Leone Sierra-Léonais', country: 'Sierra Leone' },
+        'SOS': { name: 'Shilling Somalien', country: 'Somalie' },
+        'ZAR': { name: 'Rand Sud-Africain', country: 'Afrique du Sud' },
+        'SSP': { name: 'Livre Sud-Soudanaise', country: 'Soudan du Sud' },
+        'SDG': { name: 'Livre Soudanaise', country: 'Soudan' },
+        'TZS': { name: 'Shilling Tanzanien', country: 'Tanzanie' },
+        'TND': { name: 'Dinar Tunisien', country: 'Tunisie' },
+        'ZMW': { name: 'Kwacha Zambien', country: 'Zambie' },
+        'MRU': { name: 'Ouguiya Mauritanien', country: 'Mauritanie' }
     };
 
     const worldCurrencies = {
@@ -34,7 +59,27 @@ $(document).ready(function() {
         'AUD': { name: 'Dollar Australien', region: 'Océanie' },
         'CNY': { name: 'Yuan Chinois', region: 'Asie' },
         'INR': { name: 'Roupie Indienne', region: 'Asie' },
-        'BRL': { name: 'Real Brésilien', region: 'Amérique du Sud' }
+        'BRL': { name: 'Real Brésilien', region: 'Amérique du Sud' },
+        'RUB': { name: 'Rouble Russe', region: 'Europe' },
+        'KRW': { name: 'Won Sud-Coréen', region: 'Asie' },
+        'MXN': { name: 'Peso Mexicain', region: 'Amérique du Nord' },
+        'SGD': { name: 'Dollar de Singapour', region: 'Asie' },
+        'HKD': { name: 'Dollar de Hong Kong', region: 'Asie' },
+        'NOK': { name: 'Couronne Norvégienne', region: 'Europe' },
+        'SEK': { name: 'Couronne Suédoise', region: 'Europe' },
+        'DKK': { name: 'Couronne Danoise', region: 'Europe' },
+        'PLN': { name: 'Zloty Polonais', region: 'Europe' },
+        'THB': { name: 'Baht Thaïlandais', region: 'Asie' },
+        'IDR': { name: 'Roupie Indonésienne', region: 'Asie' },
+        'MYR': { name: 'Ringgit Malaisien', region: 'Asie' },
+        'PHP': { name: 'Peso Philippin', region: 'Asie' },
+        'NZD': { name: 'Dollar Néo-Zélandais', region: 'Océanie' },
+        'ARS': { name: 'Peso Argentin', region: 'Amérique du Sud' },
+        'CLP': { name: 'Peso Chilien', region: 'Amérique du Sud' },
+        'COP': { name: 'Peso Colombien', region: 'Amérique du Sud' },
+        'TRY': { name: 'Livre Turque', region: 'Asie' },
+        'SAR': { name: 'Riyal Saoudien', region: 'Moyen-Orient' },
+        'AED': { name: 'Dirham des Émirats', region: 'Moyen-Orient' }
     };
 
     // Local storage keys
@@ -52,11 +97,37 @@ $(document).ready(function() {
     init();
 
     function init() {
+        initializeSelect2();
         setupEventListeners();
         loadAllRates();
         renderFavorites();
         renderHistory();
         setActivePage();
+    }
+
+    // Initialize Select2 for currency selects
+    function initializeSelect2() {
+        $('.currency-select').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Rechercher une devise...',
+            allowClear: false,
+            width: '100%',
+            language: {
+                noResults: function() {
+                    return "Aucune devise trouvée";
+                },
+                searching: function() {
+                    return "Recherche en cours...";
+                }
+            }
+        });
+
+        // Handle change event for Select2
+        $('.currency-select').on('select2:select', function() {
+            if ($('#fromAmount').val()) {
+                convertCurrency();
+            }
+        });
     }
 
     // Event Listeners
@@ -99,8 +170,8 @@ $(document).ready(function() {
             convertCurrency();
         });
 
-        // Auto-convert on input change
-        $('#fromAmount, #fromCurrency, #toCurrency').on('change input', function() {
+        // Auto-convert on input change (currency selects handled by Select2 listener)
+        $('#fromAmount').on('change input', function() {
             if ($('#fromAmount').val()) {
                 convertCurrency();
             }
