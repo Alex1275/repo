@@ -118,13 +118,19 @@ $(document).ready(function() {
                 },
                 searching: function() {
                     return "Recherche en cours...";
+                },
+                inputTooShort: function() {
+                    return "Tapez pour rechercher...";
                 }
-            }
+            },
+            // Enable search
+            minimumResultsForSearch: 0
         });
 
-        // Handle change event for Select2
-        $('.currency-select').on('select2:select', function() {
-            if ($('#fromAmount').val()) {
+        // Handle change event for Select2 (only when user selects, not when programmatically set)
+        $('.currency-select').on('select2:select', function(e) {
+            // Only convert if user manually selected
+            if ($('#fromAmount').val() && e.params && e.params.data) {
                 convertCurrency();
             }
         });
@@ -289,8 +295,9 @@ $(document).ready(function() {
         const fromCurrency = $('#fromCurrency').val();
         const toCurrency = $('#toCurrency').val();
 
-        $('#fromCurrency').val(toCurrency);
-        $('#toCurrency').val(fromCurrency);
+        // Update values and trigger change for Select2
+        $('#fromCurrency').val(toCurrency).trigger('change');
+        $('#toCurrency').val(fromCurrency).trigger('change');
 
         if ($('#fromAmount').val()) {
             convertCurrency();
@@ -490,8 +497,8 @@ $(document).ready(function() {
 
     // Use favorite
     window.useFavorite = function(from, to) {
-        $('#fromCurrency').val(from);
-        $('#toCurrency').val(to);
+        $('#fromCurrency').val(from).trigger('change');
+        $('#toCurrency').val(to).trigger('change');
         navigateToSection('#converter');
         if ($('#fromAmount').val()) {
             convertCurrency();
