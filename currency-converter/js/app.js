@@ -117,21 +117,25 @@ $(document).ready(function() {
                     return "Aucune devise trouvée";
                 },
                 searching: function() {
-                    return "Recherche en cours...";
+                    return "Recherche...";
                 },
                 inputTooShort: function() {
                     return "Tapez pour rechercher...";
                 }
             },
             // Enable search
-            minimumResultsForSearch: 0
+            minimumResultsForSearch: 0,
+            // Improve dropdown placement
+            dropdownAutoWidth: true
         });
 
-        // Handle change event for Select2 (only when user selects, not when programmatically set)
+        // Handle change event for Select2
         $('.currency-select').on('select2:select', function(e) {
-            // Only convert if user manually selected
+            // Convert when user manually selects
             if ($('#fromAmount').val() && e.params && e.params.data) {
-                convertCurrency();
+                setTimeout(function() {
+                    convertCurrency();
+                }, 50);
             }
         });
     }
@@ -227,6 +231,7 @@ $(document).ready(function() {
             url: API_BASE_URL + 'EUR',
             method: 'GET',
             dataType: 'json',
+            timeout: 10000,
             success: function(data) {
                 currentRates = data.rates;
                 updateLastUpdate(data.date);
@@ -235,7 +240,7 @@ $(document).ready(function() {
                 hideLoading();
             },
             error: function(xhr, status, error) {
-                console.error('Error loading rates:', error);
+                console.error('Error loading rates:', status, error);
                 showError('Erreur lors du chargement des taux de change. Veuillez réessayer.');
                 hideLoading();
             }
@@ -259,6 +264,7 @@ $(document).ready(function() {
             url: API_BASE_URL + fromCurrency,
             method: 'GET',
             dataType: 'json',
+            timeout: 10000,
             success: function(data) {
                 const rate = data.rates[toCurrency];
                 const convertedAmount = (amount * rate).toFixed(2);
@@ -299,8 +305,11 @@ $(document).ready(function() {
         $('#fromCurrency').val(toCurrency).trigger('change');
         $('#toCurrency').val(fromCurrency).trigger('change');
 
+        // Convert after a small delay to ensure Select2 updated
         if ($('#fromAmount').val()) {
-            convertCurrency();
+            setTimeout(function() {
+                convertCurrency();
+            }, 100);
         }
     }
 
