@@ -5,30 +5,56 @@ Application web responsive de conversion de devises avec un focus particulier su
 ## Fonctionnalités
 
 ### Conversion de devises
-- Conversion en temps réel entre plus de 25 devises internationales
-- Focus sur 15 devises africaines principales
+- Conversion en temps réel entre plus de 70 devises internationales
+- **Focus sur 40 devises africaines** (le plus complet du marché)
 - Taux de change mis à jour quotidiennement
 - Conversion Ajax sans rechargement de page
+- **Recherche de devises avec Select2** (filtrage en temps réel)
 - Affichage du taux de change en temps réel
 
-### Devises Africaines Supportées
-- XOF - Franc CFA (Afrique de l'Ouest - UEMOA)
-- XAF - Franc CFA (Afrique Centrale - CEMAC)
-- ZAR - Rand Sud-Africain
-- NGN - Naira Nigérian
-- EGP - Livre Égyptienne
-- MAD - Dirham Marocain
-- TND - Dinar Tunisien
-- DZD - Dinar Algérien
-- KES - Shilling Kényan
-- GHS - Cedi Ghanéen
-- ETB - Birr Éthiopien
-- UGX - Shilling Ougandais
-- TZS - Shilling Tanzanien
-- MUR - Roupie Mauricienne
-- MGA - Ariary Malgache
+### Devises Africaines Supportées (40)
+- **XOF** - Franc CFA (Afrique de l'Ouest - UEMOA)
+- **XAF** - Franc CFA (Afrique Centrale - CEMAC)
+- **DZD** - Dinar Algérien
+- **AOA** - Kwanza Angolais
+- **BWP** - Pula Botswanais
+- **BIF** - Franc Burundais
+- **CVE** - Escudo Cap-Verdien
+- **KMF** - Franc Comorien
+- **DJF** - Franc Djiboutien
+- **EGP** - Livre Égyptienne
+- **ERN** - Nakfa Érythréen
+- **SZL** - Lilangeni Eswatinien
+- **ETB** - Birr Éthiopien
+- **GMD** - Dalasi Gambien
+- **GHS** - Cedi Ghanéen
+- **GNF** - Franc Guinéen ⭐
+- **KES** - Shilling Kényan
+- **LSL** - Loti Lesothan
+- **LRD** - Dollar Libérien
+- **LYD** - Dinar Libyen
+- **MGA** - Ariary Malgache
+- **MWK** - Kwacha Malawite
+- **MUR** - Roupie Mauricienne
+- **MAD** - Dirham Marocain
+- **MZN** - Metical Mozambicain
+- **NAD** - Dollar Namibien
+- **NGN** - Naira Nigérian
+- **UGX** - Shilling Ougandais
+- **RWF** - Franc Rwandais
+- **STN** - Dobra Santoméen
+- **SCR** - Roupie Seychelloise
+- **SLL** - Leone Sierra-Léonais
+- **SOS** - Shilling Somalien
+- **ZAR** - Rand Sud-Africain
+- **SSP** - Livre Sud-Soudanaise
+- **SDG** - Livre Soudanaise
+- **TZS** - Shilling Tanzanien
+- **TND** - Dinar Tunisien
+- **ZMW** - Kwacha Zambien
+- **MRU** - Ouguiya Mauritanien
 
-### Devises Mondiales Supportées
+### Devises Mondiales Supportées (30+)
 - EUR - Euro
 - USD - Dollar Américain
 - GBP - Livre Sterling
@@ -39,6 +65,26 @@ Application web responsive de conversion de devises avec un focus particulier su
 - CNY - Yuan Chinois
 - INR - Roupie Indienne
 - BRL - Real Brésilien
+- RUB - Rouble Russe
+- KRW - Won Sud-Coréen
+- MXN - Peso Mexicain
+- SGD - Dollar de Singapour
+- HKD - Dollar de Hong Kong
+- NOK - Couronne Norvégienne
+- SEK - Couronne Suédoise
+- DKK - Couronne Danoise
+- PLN - Zloty Polonais
+- THB - Baht Thaïlandais
+- IDR - Roupie Indonésienne
+- MYR - Ringgit Malaisien
+- PHP - Peso Philippin
+- NZD - Dollar Néo-Zélandais
+- ARS - Peso Argentin
+- CLP - Peso Chilien
+- COP - Peso Colombien
+- TRY - Livre Turque
+- SAR - Riyal Saoudien
+- AED - Dirham des Émirats
 
 ### Interface Utilisateur
 - Design responsive (desktop, tablette, mobile)
@@ -49,12 +95,14 @@ Application web responsive de conversion de devises avec un focus particulier su
 - Interface moderne avec Bootstrap 5
 
 ### Fonctionnalités Avancées
+- **Recherche intelligente** : Select2 avec filtrage en temps réel par code ou nom de devise
 - **Favoris** : Sauvegardez vos conversions fréquentes
 - **Historique** : Consultez vos 50 dernières conversions
-- **Échange rapide** : Inversez les devises en un clic
-- **Auto-conversion** : Conversion automatique lors de la saisie
+- **Échange rapide** : Inversez les devises en un clic avec animation
+- **Auto-conversion** : Conversion automatique lors de la saisie ou sélection
 - **Stockage local** : Vos favoris et historique sont sauvegardés localement
 - **Rafraîchissement auto** : Mise à jour des taux toutes les 5 minutes
+- **Timeouts API** : Gestion intelligente des erreurs réseau (10s)
 
 ## Technologies Utilisées
 
@@ -63,6 +111,7 @@ Application web responsive de conversion de devises avec un focus particulier su
 - **JavaScript ES6** : Logique de l'application
 - **jQuery 3.7** : Manipulation du DOM et Ajax
 - **Bootstrap 5.3** : Framework CSS responsive
+- **Select2 4.1.0** : Recherche et filtrage de devises
 - **Font Awesome 6.4** : Icônes
 - **ExchangeRate-API** : API gratuite pour les taux de change
 
@@ -107,12 +156,22 @@ L'application utilise l'API **ExchangeRate-API** (https://www.exchangerate-api.c
 
 ## Fonctionnement
 
+### Recherche de Devises (Nouveau !)
+1. **Cliquez sur un select de devise** → Un champ de recherche apparaît
+2. **Tapez pour rechercher** :
+   - Par code : "GNF", "XOF", "EUR"
+   - Par nom : "Guinéen", "CFA", "Euro"
+   - Par pays : "Nigeria", "Ghana", "France"
+3. **Les résultats se filtrent en temps réel**
+4. **Sélectionnez la devise** → Conversion automatique
+
 ### Conversion
 1. Saisissez un montant
-2. Sélectionnez la devise source (devises africaines en premier)
-3. Sélectionnez la devise cible
+2. Sélectionnez la devise source avec recherche (40 devises africaines en premier)
+3. Sélectionnez la devise cible avec recherche
 4. La conversion se fait automatiquement en Ajax
 5. Le résultat s'affiche sans rechargement de page
+6. Le taux de change est affiché
 
 ### Navigation
 - **Desktop** : Utilisez la sidebar à gauche
